@@ -10,7 +10,7 @@ compiler:
   - gcc
   - clang
 addons:
-  sudo apt:
+  apt:
     packages:
       - valgrind
       - libasan0
