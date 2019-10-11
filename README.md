@@ -1,5 +1,9 @@
 # cJSON
 
+[![Build Status](https://travis-ci.org/xiaobai-pan/cJSON.svg?branch=master)](https://travis-ci.org/xiaobai-pan/cJSON)
+
+[![Build status](https://ci.appveyor.com/api/projects/status/rh41f2wxrw38r9oi/branch/master?svg=true)](https://ci.appveyor.com/project/xiaobai-pan/cjson/branch/master)
+
 Ultralightweight JSON parser in ANSI C.
 
 ## Table of contents
