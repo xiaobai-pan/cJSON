@@ -18,18 +18,18 @@ environment:
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 14 2015"
-      BUILD_SHARED_LIBS: OFF
-      ENABLE_CJSON_TEST: OFF
+      BUILD_SHARED_LIBS: ON
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 12 2013"
       BUILD_SHARED_LIBS: ON
-      ENABLE_CJSON_TEST: OFF
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 12 2013"
-      BUILD_SHARED_LIBS: OFF
-      ENABLE_CJSON_TEST: OFF
+      BUILD_SHARED_LIBS: ON
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 11 2012"
@@ -38,28 +38,28 @@ environment:
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 11 2012"
-      BUILD_SHARED_LIBS: OFF
-      ENABLE_CJSON_TEST: OFF
+      BUILD_SHARED_LIBS: ON
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 10 2010"
       BUILD_SHARED_LIBS: ON
-      ENABLE_CJSON_TEST: OFF
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 10 2010"
-      BUILD_SHARED_LIBS: OFF
-      ENABLE_CJSON_TEST: OFF
+      BUILD_SHARED_LIBS: ON
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 9 2008"
       BUILD_SHARED_LIBS: ON
-      ENABLE_CJSON_TEST: OFF
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 9 2008"
-      BUILD_SHARED_LIBS: OFF
-      ENABLE_CJSON_TEST: OFF
+      BUILD_SHARED_LIBS: ON
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
 
@@ -80,7 +80,7 @@ build_script:
   - cmake "-G%GENERATOR%%CMAKE_GEN_SUFFIX%" -DBUILD_SHARED_LIBS=%BUILD_SHARED_LIBS% -DENABLE_CJSON_TEST=%ENABLE_CJSON_TEST%  -H. -Bbuild
   - cmake --build build --config "%CONFIGURATION%"
   - cd C:/projects/cjson/build/tests/Release
-  - print_number.exe
+  - *.exe
 
 
 on_failure:
