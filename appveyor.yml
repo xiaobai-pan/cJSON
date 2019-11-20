@@ -34,7 +34,7 @@ environment:
 
     - GENERATOR: "Visual Studio 11 2012"
       BUILD_SHARED_LIBS: ON
-      ENABLE_CJSON_TEST: OFF
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 11 2012"
@@ -80,7 +80,7 @@ build_script:
   - cmake "-G%GENERATOR%%CMAKE_GEN_SUFFIX%" -DBUILD_SHARED_LIBS=%BUILD_SHARED_LIBS% -DENABLE_CJSON_TEST=%ENABLE_CJSON_TEST%  -H. -Bbuild
   - cmake --build build --config "%CONFIGURATION%"
   - cd C:/projects/cjson/build/tests/Release
-  - *.exe
+  - print_number.exe
 
 
 on_failure:
