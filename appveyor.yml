@@ -14,7 +14,7 @@ environment:
   matrix:
     - GENERATOR: "Visual Studio 14 2015"
       BUILD_SHARED_LIBS: ON
-      ENABLE_CJSON_TEST: OFF
+      ENABLE_CJSON_TEST: ON
       ENABLE_CJSON_UTILS: ON
 
     - GENERATOR: "Visual Studio 14 2015"
@@ -79,6 +79,8 @@ build_script:
   - ps: if($env:PLATFORM -eq "x64") { $env:CMAKE_GEN_SUFFIX=" Win64" }
   - cmake "-G%GENERATOR%%CMAKE_GEN_SUFFIX%" -DBUILD_SHARED_LIBS=%BUILD_SHARED_LIBS% -DENABLE_CJSON_TEST=%ENABLE_CJSON_TEST%  -H. -Bbuild
   - cmake --build build --config "%CONFIGURATION%"
+  - cd Debug
+  - cJSON_test.exe
 
 
 on_failure:
