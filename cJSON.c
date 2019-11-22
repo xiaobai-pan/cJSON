@@ -79,7 +79,7 @@ CJSON_PUBLIC(const char *) cJSON_GetErrorPtr(void)
     return (const char*) (global_error.json + global_error.position);
 }
 
-CJSON_PUBLIC(char *) cJSON_GetStringValue(cJSON *item) {
+CJSON_PUBLIC(char *) cJSON_GetStringValue(const cJSON * const item) {
     if (!cJSON_IsString(item)) {
         return NULL;
     }
@@ -487,9 +487,9 @@ static cJSON_bool print_number(const cJSON * const item, printbuffer * const out
     double d = item->valuedouble;
     int length = 0;
     size_t i = 0;
-    unsigned char number_buffer[26]; /* temporary buffer to print the number into */
+    unsigned char number_buffer[26] = {0}; /* temporary buffer to print the number into */
     unsigned char decimal_point = get_decimal_point();
-    double test;
+    double test = 0.0;
 
     if (output_buffer == NULL)
     {
@@ -536,7 +536,34 @@ static cJSON_bool print_number(const cJSON * const item, printbuffer * const out
             output_pointer[i] = '.';
             continue;
         }
-
+    	if(number_buffer[i]=='e')
+	{
+		if(number_buffer[i+1]=='+'&&number_buffer[i+2]=='0')
+		{
+			output_pointer[i] = number_buffer[i];
+			output_pointer[i+1] = number_buffer[i+1];
+			output_pointer[i+2] = number_buffer[i+3];
+			for(i = i+2;i<((size_t)length);i++)
+			{
+				output_pointer[i] = number_buffer[i+1];
+			}
+			break;
+		}
+		else if(number_buffer[i+1]=='-'&&number_buffer[i+2]=='0'&&number_buffer[i+3]=='0')
+		{
+			output_pointer[i] = number_buffer[i];
+			output_pointer[i+1] = number_buffer[i+1];
+			output_pointer[i+2] = number_buffer[i+2];
+			for(i=i+2;i<((size_t)length);i++)
+			{
+				output_pointer[i] = number_buffer[i+1];
+			}
+			break;
+		}
+	
+	
+	
+	}
         output_pointer[i] = number_buffer[i];
     }
     output_pointer[i] = '\0';
@@ -1199,20 +1226,20 @@ CJSON_PUBLIC(char *) cJSON_PrintBuffered(const cJSON *item, int prebuffer, cJSON
     return (char*)p.buffer;
 }
 
-CJSON_PUBLIC(cJSON_bool) cJSON_PrintPreallocated(cJSON *item, char *buf, const int len, const cJSON_bool fmt)
+CJSON_PUBLIC(cJSON_bool) cJSON_PrintPreallocated(cJSON *item, char *buffer, const int length, const cJSON_bool format)
 {
     printbuffer p = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
 
-    if ((len < 0) || (buf == NULL))
+    if ((length < 0) || (buffer == NULL))
     {
         return false;
     }
 
-    p.buffer = (unsigned char*)buf;
-    p.length = (size_t)len;
+    p.buffer = (unsigned char*)buffer;
+    p.length = (size_t)length;
     p.offset = 0;
     p.noalloc = true;
-    p.format = fmt;
+    p.format = format;
     p.hooks = global_hooks;
 
     return print_value(item, &p);
@@ -2290,12 +2317,12 @@ CJSON_PUBLIC(cJSON *) cJSON_CreateFalse(void)
     return item;
 }
 
-CJSON_PUBLIC(cJSON *) cJSON_CreateBool(cJSON_bool b)
+CJSON_PUBLIC(cJSON *) cJSON_CreateBool(cJSON_bool boolean)
 {
     cJSON *item = cJSON_New_Item(&global_hooks);
     if(item)
     {
-        item->type = b ? cJSON_True : cJSON_False;
+        item->type = boolean ? cJSON_True : cJSON_False;
     }
 
     return item;
@@ -2524,7 +2551,7 @@ CJSON_PUBLIC(cJSON *) cJSON_CreateDoubleArray(const double *numbers, int count)
     return a;
 }
 
-CJSON_PUBLIC(cJSON *) cJSON_CreateStringArray(const char **strings, int count)
+CJSON_PUBLIC(cJSON *) cJSON_CreateStringArray(const char *const *strings, int count)
 {
     size_t i = 0;
     cJSON *n = NULL;
