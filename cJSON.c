@@ -538,6 +538,15 @@ static cJSON_bool print_number(const cJSON * const item, printbuffer * const out
         }
 
         output_pointer[i] = number_buffer[i];
+	if((number_buffer[i-3]='e' && number_buffer[i-2]= '0' && number_buffer[i-1]= '0' && number_buffer[i]= '0')||(number_buffer[i-2]= 'e' && number_buffer[i-1]= '+' && number_buffer[i]= '0'))
+	{
+	   while(i<((size_t)length))
+	   {
+	        output_pointer[i] = number_buffer[i+1];
+	        i++;	
+	   }
+	   break;	   
+	}
     }
     output_pointer[i] = '\0';
 
