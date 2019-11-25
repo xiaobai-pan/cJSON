@@ -79,9 +79,9 @@ build_script:
   - ps: if($env:PLATFORM -eq "x64") { $env:CMAKE_GEN_SUFFIX=" Win64" }
   - cmake "-G%GENERATOR%%CMAKE_GEN_SUFFIX%" -DBUILD_SHARED_LIBS=%BUILD_SHARED_LIBS% -DENABLE_CJSON_TEST=%ENABLE_CJSON_TEST%  -H. -Bbuild
   - cmake --build build --config "%CONFIGURATION%"
-  - cd C:/projects/cjson/build/tests
-  - make test
-   
+  - cd C:/projects/cjson/build/tests/Release
+  - ls
+  - print_number.exe 
 
 
 on_failure:
