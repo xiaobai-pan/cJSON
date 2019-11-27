@@ -44,7 +44,7 @@ static void assert_print_number(const char *expected, double input)
     TEST_ASSERT_TRUE_MESSAGE(print_number(item, &buffer), "Failed to print number.");
     
     /*In versions earlier than vs2015, print_number handles, for example, '1e-09', but returns buffer.buffer is' 1e-009 ', so we need to remove the extra' 0 '*/
-    for(i = 0;i <sizeof(new_buffer);i++)
+    for(i = 0;i <sizeof(new_buffer)-1;i++)
     {
         if(i >3 && new_buffer[i] =='0')
         {
