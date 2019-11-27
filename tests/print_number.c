@@ -55,6 +55,7 @@ static void assert_print_number(const char *expected, double input)
                     new_buffer[i] = new_buffer[i+1];
                     i++;
                 }
+		break;
             }
         
         }
