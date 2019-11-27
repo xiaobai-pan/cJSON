@@ -38,6 +38,7 @@ static void assert_print_number(const char *expected, double input)
     buffer.hooks = global_hooks;
     buffer.buffer = new_buffer;
 
+    memset(new_buffer, 0, sizeof(new_buffer));
     memset(item, 0, sizeof(item));
     cJSON_SetNumberValue(item, input);
 
